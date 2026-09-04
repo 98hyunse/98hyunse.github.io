@@ -1,9 +1,11 @@
 import type { ReactNode } from 'react';
+import { Card } from '@/components/ui/card';
+import { PublicationBadge } from '@/components/publication-badge';
 
 function Me({ mark = '' }: { mark?: string }) { return <strong>Hyunse Lee{mark && <sup>{mark}</sup>}</strong>; }
-const papers: { title: string; authors: ReactNode; venue: string; url?: string; note?: string; description: string; code?: string; role?: string }[] = [
-  { title: 'SafeBranch: Branch-Pair Safety Alignment for Embodied Agents', authors: <><Me mark="*" />, Jiwoo Jeong<sup>*</sup>, Haneul Lee, Kyochul Jang, Youngjae Yu<sup>†</sup>, Woojin Lee<sup>†</sup></>, venue: 'Findings of EMNLP 2026 · Accepted', url: 'https://arxiv.org/abs/2608.19729', description: 'Developed a method that compares safe and unsafe actions in the same situation, helping embodied agents avoid hazardous behavior in simulated everyday environments.', code: 'https://github.com/98hyunse/SafeBranch' },
-  { title: 'SeMoBridge: Semantic Modality Bridge for Efficient Few-Shot Adaptation of CLIP', authors: <>Christoph Timmermann<sup>*</sup>, <Me mark="*" />, Woojin Lee<sup>†</sup></>, venue: 'Pattern Recognition · Under revision', url: 'https://arxiv.org/abs/2509.26036', description: 'Co-developed a method that adapts CLIP, an image–text model, to recognize new categories using only a few labeled examples.' },
+const papers: { title: string; authors: ReactNode; venue: string; status?: string; url?: string; note?: string; description: string; code?: string; role?: string }[] = [
+  { title: 'SafeBranch: Branch-Pair Safety Alignment for Embodied Agents', authors: <><Me mark="*" />, Jiwoo Jeong<sup>*</sup>, Haneul Lee, Kyochul Jang, Youngjae Yu<sup>†</sup>, Woojin Lee<sup>†</sup></>, venue: 'Findings of EMNLP 2026', status: 'Accepted', url: 'https://arxiv.org/abs/2608.19729', description: 'Developed a method that compares safe and unsafe actions in the same situation, helping embodied agents avoid hazardous behavior in simulated everyday environments.', code: 'https://github.com/98hyunse/SafeBranch' },
+  { title: 'SeMoBridge: Semantic Modality Bridge for Efficient Few-Shot Adaptation of CLIP', authors: <>Christoph Timmermann<sup>*</sup>, <Me mark="*" />, Woojin Lee<sup>†</sup></>, venue: 'Pattern Recognition', status: 'Under revision', url: 'https://arxiv.org/abs/2509.26036', description: 'Co-developed a method that adapts CLIP, an image–text model, to recognize new categories using only a few labeled examples.' },
   { title: 'DUET: Dual-Perspective Pseudo Labeling and Uncertainty-aware Exploration & Exploitation Training for Source-Free Domain Adaptation', authors: <>JaeYun Lee, Jae Hyeon Park, Gyoomin Lee, Bogyeong Kim, Min Hee Cha, Hyeok Nam, Joo Jeon, <Me />, Sung In Cho<sup>†</sup></>, venue: 'NeurIPS 2025', url: 'https://proceedings.neurips.cc/paper_files/paper/2025/hash/6c8dfbbd1ba3e22339e58a336cbed52b-Abstract-Conference.html', description: 'Adapts a trained vision model to new, unlabeled data without accessing its original training data. Agreement between the model and CLIP helps select more reliable training signals.' },
   { title: 'Doodle to Detect: A Goofy but Powerful Approach to Skeleton-based Hand Gesture Recognition', authors: <>Sang Hoon Han<sup>*</sup>, Seonho Lee<sup>*</sup>, Hyeok Nam<sup>*</sup>, Jae Hyeon Park, Min Hee Cha, Min Geol Kim, <Me />, Sangyeon Ahn, Moonju Chae, Sung In Cho<sup>†</sup></>, venue: 'NeurIPS 2025', url: 'https://proceedings.neurips.cc/paper_files/paper/2025/hash/ccf308ecd36579d82532851419c283cd-Abstract-Conference.html', description: 'Turns sequences of hand-joint movements into visual representations that a vision model can recognize, making gesture recognition more robust to differences in viewpoints and body proportions.' },
   { title: 'A Study on an ADHD Diagnostic Model Using Artificial Intelligence and EEG', authors: <><Me />, Sang Hoon Han, Min Geol Kim, Min-Chul Shin, Sung In Cho, Seung-Hyun Yoon</>, venue: 'Magazine of the IEIE, 52(7), 63–73 · 2025', url: 'https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12317768', description: 'Analyzed multichannel brainwave signals and developed an ADHD assessment research model using patterns across electrodes and frequency bands. Work included signal preprocessing, feature extraction, and model evaluation.', role: 'Related industry–academia project: project lead · Sunjae Brain Science · Jun–Nov 2024', note: 'Published in Korean; title translated into English.' },
@@ -30,17 +32,28 @@ export default function Home() {
       </section>
       <Section id="publications" number="01" title="Publications">
         <p className="legend">* Equal contribution (co-first authors) · † Corresponding author</p>
-        <ol className="papers">{papers.map(paper => <li key={paper.title}><article>
-          <h3>{paper.url ? <a href={paper.url}>{paper.title}<span className="paper-arrow" aria-hidden="true"> ↗</span></a> : paper.title}</h3>
-          <p className="venue">{paper.venue}</p>
-          <p className="authors">{paper.authors}</p>
-          <p className="paper-description">{paper.description}</p>
-          {paper.role && <p className="meta">{paper.role}</p>}
-          {paper.code && <a className="text-link" href={paper.code}>Code on GitHub ↗</a>}
-          {paper.note && <p className="translation-note">{paper.note}</p>}
-        </article></li>)}</ol>
+        <ol className="papers">{papers.map(paper => <li key={paper.title}>
+          <Card className="paper-card"><article>
+            <header className="paper-header">
+              <h3>{paper.title}</h3>
+              <div className="paper-metadata"><span className="venue">{paper.venue}</span><PublicationBadge status={paper.status ?? 'Published'} /></div>
+              <p className="authors"><span className="sr-only">Authors: </span>{paper.authors}</p>
+            </header>
+            <div className="paper-summary">
+              <p className="paper-description">{paper.description}</p>
+              {paper.role && <p className="meta">{paper.role}</p>}
+            </div>
+            <footer className="paper-footer">
+              <div className="paper-links">
+                {paper.url && <a href={paper.url} aria-label={`Read paper: ${paper.title}`}>Paper <span aria-hidden="true">↗</span></a>}
+                {paper.code && <a href={paper.code} aria-label={`View code: ${paper.title}`}>Code <span aria-hidden="true">↗</span></a>}
+              </div>
+              {paper.note && <p className="translation-note">{paper.note}</p>}
+            </footer>
+          </article></Card>
+        </li>)}</ol>
         <aside className="ongoing-work" aria-labelledby="ongoing-title">
-          <p className="eyebrow">On-going</p>
+          <PublicationBadge status="On-going" />
           <h3 id="ongoing-title">Safer robot manipulation with VLA post-training</h3>
           <p>Studying post-training methods that compare safe and unsafe actions to help robot arms avoid collisions in simulation.</p>
         </aside>

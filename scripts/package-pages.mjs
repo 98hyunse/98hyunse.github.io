@@ -12,6 +12,16 @@ if (html.includes('Your site is taking shape')) throw new Error('Starter content
 if (html.includes('id="research"') || html.includes('class="research-list"')) throw new Error('Separate research list remains');
 if ((html.match(/class="paper-description"/g) || []).length !== 6) throw new Error('Each publication must have a research explanation');
 if (!html.includes('/assets/hyunse-lee.png')) throw new Error('New portrait is missing');
+for (const [pattern, count, label] of [
+  [/data-slot="card"/g, 6, 'publication cards'],
+  [/class="paper-header"/g, 6, 'title and metadata areas'],
+  [/class="paper-summary"/g, 6, 'research summary areas'],
+  [/class="paper-footer"/g, 6, 'publication link footers'],
+  [/aria-label="Read paper:/g, 6, 'paper links'],
+  [/publication-status status-/g, 7, 'publication and ongoing status labels'],
+]) {
+  if ((html.match(pattern) || []).length !== count) throw new Error(`Unexpected number of ${label}`);
+}
 const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
 for (const match of html.matchAll(/href="#([^"]+)"/g)) {
   if (!ids.has(match[1])) throw new Error(`Broken section link: ${match[1]}`);
