@@ -13,6 +13,13 @@ if (html.includes('id="research"') || html.includes('class="research-list"')) th
 if ((html.match(/class="paper-description"/g) || []).length !== 6) throw new Error('Each publication must have a research explanation');
 if (!html.includes('/assets/hyunse-lee.png')) throw new Error('New portrait is missing');
 if (html.includes('paper-card')) throw new Error('Draft card design must not be deployed');
+if (!html.includes('href="mailto:98hyunse@gmail.com"')) throw new Error('Contact email is missing');
+const articles = [...html.matchAll(/<article>([\s\S]*?)<\/article>/g)];
+if (articles.length !== 6 || articles.some(([, article]) => article.indexOf('class="venue"') < 0 || article.indexOf('class="venue"') > article.indexOf('<h3>'))) {
+  throw new Error('Publication venue and status must precede each title');
+}
+if ((html.match(/class="education-entry"><p class="date"/g) || []).length !== 3) throw new Error('Education dates must lead each entry');
+if (html.includes('RESEARCH APPOINTMENT')) throw new Error('Outdated research appointment heading remains');
 if (html.indexOf('id="ongoing-title"') > html.indexOf('id="publications"')) throw new Error('Ongoing work must precede Publications');
 for (const url of ['https://github.com/l3umblee/duet-sfda', 'https://github.com/capableofanything/SKETCH']) {
   if (!html.includes(url)) throw new Error(`Missing supplied code link: ${url}`);

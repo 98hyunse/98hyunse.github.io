@@ -25,7 +25,7 @@ export default function Home() {
     <header className="site-header"><a className="wordmark" href="#about">Hyunse Lee<span aria-hidden="true"> / </span><span className="wordmark-sub">Research</span></a><nav aria-label="Main navigation"><a href="#publications">Publications</a><a href="#education">Education</a><a href="#awards">Awards</a></nav></header>
     <main id="main">
       <section className="intro" id="about" aria-labelledby="name">
-        <div className="identity"><div className="portrait-frame"><img src="/assets/hyunse-lee.png" width="1108" height="1419" alt="Hyunse Lee" fetchPriority="high" /></div><div><p className="eyebrow">AI RESEARCH · DONGGUK UNIVERSITY</p><h1 id="name">Hyunse Lee</h1><p className="role">AI Researcher &amp; M.S. Student</p><div className="profile-links"><a href="https://github.com/98hyunse">GitHub <span aria-hidden="true">↗</span></a><a href="/assets/Hyunse-Lee-CV-KO.pdf" download>Download CV <span className="link-note">(Korean PDF)</span> <span aria-hidden="true">↓</span></a></div></div></div>
+        <div className="identity"><div className="portrait-frame"><img src="/assets/hyunse-lee.png" width="1108" height="1419" alt="Hyunse Lee" fetchPriority="high" /></div><div><p className="eyebrow">AI RESEARCH · DONGGUK UNIVERSITY</p><h1 id="name">Hyunse Lee</h1><p className="role">AI Researcher &amp; M.S. Student</p><div className="profile-links"><a href="mailto:98hyunse@gmail.com">98hyunse@gmail.com</a><a href="https://github.com/98hyunse">GitHub <span aria-hidden="true">↗</span></a><a href="/assets/Hyunse-Lee-CV-KO.pdf" download>Download CV <span className="link-note">(Korean PDF)</span> <span aria-hidden="true">↓</span></a></div></div></div>
         <div className="bio"><p>I am an M.S. student interested in <strong>Vision–Language–Action (VLA), Embodied Agents, Vision–Language Models (VLMs), and Computer Vision.</strong></p><p>I aim to understand how technology works and turn that understanding into practical AI and robotics solutions. I am especially motivated by real-world problems. I want to work close to where technology is used and build tools that help people in their work and everyday lives.</p></div>
       </section>
         <aside className="ongoing-work" aria-labelledby="ongoing-title">
@@ -36,8 +36,8 @@ export default function Home() {
       <Section id="publications" number="01" title="Publications">
         <p className="legend">* Equal contribution (co-first authors) · † Corresponding author</p>
         <ol className="papers">{papers.map(paper => <li key={paper.title}><article>
-          <h3>{paper.url ? <a href={paper.url}>{paper.title}<span className="paper-arrow" aria-hidden="true"> ↗</span></a> : paper.title}</h3>
           <p className="venue">{paper.venue}</p>
+          <h3>{paper.url ? <a href={paper.url}>{paper.title}<span className="paper-arrow" aria-hidden="true"> ↗</span></a> : paper.title}</h3>
           <p className="authors">{paper.authors}</p>
           <p className="paper-description">{paper.description}</p>
           {paper.role && <p className="meta">{paper.role}</p>}
@@ -46,7 +46,20 @@ export default function Home() {
         </article></li>)}</ol>
 
       </Section>
-      <Section id="education" number="02" title="Education"><div className="education-entry"><div><h3>M.S. in Multimedia Software</h3><p>Dongguk University · Graduate School</p><p className="meta">GPA 4.13 / 4.5</p></div><p className="date">Mar 2025 – Feb 2027<br /><span>Expected graduation</span></p></div><div className="education-entry"><div><h3>Bachelor’s in Multimedia Engineering</h3><p>Dongguk University</p><p className="meta">GPA 4.07 / 4.5 · Graduated with honors</p></div><p className="date">Mar 2019 – Feb 2025</p></div><div className="appointment"><div className="education-entry"><div><h3>Undergraduate Researcher</h3><p>Smart Vision Media Lab · Dongguk University</p></div><p className="date">Dec 2022 – Dec 2024</p></div></div></Section>
+      <Section id="education" number="02" title="Education">
+        <div className="education-entry">
+          <p className="date"><time dateTime="2025-03">Mar 2025</time> – <time dateTime="2027-02">Feb 2027</time><br /><span>Expected graduation</span></p>
+          <div><h3>M.S. in Multimedia Software</h3><p>Dongguk University · Graduate School</p><p className="meta">GPA 4.13 / 4.5</p></div>
+        </div>
+        <div className="education-entry">
+          <p className="date"><time dateTime="2019-03">Mar 2019</time> – <time dateTime="2025-02">Feb 2025</time></p>
+          <div><h3>Bachelor’s in Multimedia Engineering</h3><p>Dongguk University</p><p className="meta">GPA 4.07 / 4.5 · Graduated with honors</p></div>
+        </div>
+        <div className="appointment"><div className="education-entry">
+          <p className="date"><time dateTime="2022-12">Dec 2022</time> – <time dateTime="2024-12">Dec 2024</time></p>
+          <div><h3>Undergraduate Researcher</h3><p>Smart Vision Media Lab · Dongguk University</p></div>
+        </div></div>
+      </Section>
       <Section id="awards" number="03" title="Awards"><ul className="awards-list">{awards.map(([date,title,detail]) => <li key={title}><span className="date">{date}</span><div><h3>{title}</h3><p>{detail}</p></div></li>)}</ul></Section>
     </main>
     <footer className="site-footer"><span>Hyunse Lee</span><span>Last updated · September 2026</span><a href="#about">Back to top ↑</a></footer>
