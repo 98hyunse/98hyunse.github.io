@@ -18,9 +18,14 @@ for (const [pattern, count, label] of [
   [/class="paper-summary"/g, 6, 'research summary areas'],
   [/class="paper-footer"/g, 6, 'publication link footers'],
   [/aria-label="Read paper:/g, 6, 'paper links'],
+  [/aria-label="View code:/g, 3, 'code links'],
   [/publication-status status-/g, 7, 'publication and ongoing status labels'],
 ]) {
   if ((html.match(pattern) || []).length !== count) throw new Error(`Unexpected number of ${label}`);
+}
+if (html.indexOf('id="ongoing-title"') > html.indexOf('id="publications"')) throw new Error('Ongoing work must precede Publications');
+for (const url of ['https://github.com/l3umblee/duet-sfda', 'https://github.com/capableofanything/SKETCH']) {
+  if (!html.includes(url)) throw new Error(`Missing supplied code link: ${url}`);
 }
 const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
 for (const match of html.matchAll(/href="#([^"]+)"/g)) {
