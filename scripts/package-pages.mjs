@@ -12,17 +12,7 @@ if (html.includes('Your site is taking shape')) throw new Error('Starter content
 if (html.includes('id="research"') || html.includes('class="research-list"')) throw new Error('Separate research list remains');
 if ((html.match(/class="paper-description"/g) || []).length !== 6) throw new Error('Each publication must have a research explanation');
 if (!html.includes('/assets/hyunse-lee.png')) throw new Error('New portrait is missing');
-for (const [pattern, count, label] of [
-  [/data-slot="card"/g, 6, 'publication cards'],
-  [/class="paper-header"/g, 6, 'title and metadata areas'],
-  [/class="paper-summary"/g, 6, 'research summary areas'],
-  [/class="paper-footer"/g, 6, 'publication link footers'],
-  [/aria-label="Read paper:/g, 6, 'paper links'],
-  [/aria-label="View code:/g, 3, 'code links'],
-  [/publication-status status-/g, 7, 'publication and ongoing status labels'],
-]) {
-  if ((html.match(pattern) || []).length !== count) throw new Error(`Unexpected number of ${label}`);
-}
+if (html.includes('paper-card')) throw new Error('Draft card design must not be deployed');
 if (html.indexOf('id="ongoing-title"') > html.indexOf('id="publications"')) throw new Error('Ongoing work must precede Publications');
 for (const url of ['https://github.com/l3umblee/duet-sfda', 'https://github.com/capableofanything/SKETCH']) {
   if (!html.includes(url)) throw new Error(`Missing supplied code link: ${url}`);
