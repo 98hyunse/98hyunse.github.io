@@ -9,6 +9,9 @@ for (const expected of ['Hyunse Lee', 'SafeBranch', 'SeMoBridge', 'Under revisio
   if (!html.includes(expected)) throw new Error(`Missing expected content: ${expected}`);
 }
 if (html.includes('Your site is taking shape')) throw new Error('Starter content remains');
+if (html.includes('id="research"') || html.includes('class="research-list"')) throw new Error('Separate research list remains');
+if ((html.match(/class="paper-description"/g) || []).length !== 6) throw new Error('Each publication must have a research explanation');
+if (!html.includes('/assets/hyunse-lee.png')) throw new Error('New portrait is missing');
 const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
 for (const match of html.matchAll(/href="#([^"]+)"/g)) {
   if (!ids.has(match[1])) throw new Error(`Broken section link: ${match[1]}`);
