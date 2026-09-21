@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 const source = resolve('dist/client');
 const target = resolve('out');
 const html = readFileSync(resolve(source, 'index.html'), 'utf8');
-for (const expected of ['Hyunse Lee', 'SafeBranch', 'SeMoBridge', 'Under revision', 'On-going', '4.13']) {
+for (const expected of ['Hyunse Lee', 'SafeBranch', 'SeMoBridge', 'Under revision', 'Submitted to ICRA 2027', 'Collision-to-Preference', '4.13']) {
   if (!html.includes(expected)) throw new Error(`Missing expected content: ${expected}`);
 }
 if (html.includes('Your site is taking shape')) throw new Error('Starter content remains');
@@ -20,7 +20,8 @@ if (articles.length !== 6 || articles.some(([, article]) => article.indexOf('cla
 }
 if ((html.match(/class="education-entry"><p class="date"/g) || []).length !== 3) throw new Error('Education dates must lead each entry');
 if (html.includes('RESEARCH APPOINTMENT')) throw new Error('Outdated research appointment heading remains');
-if (html.indexOf('id="ongoing-title"') > html.indexOf('id="publications"')) throw new Error('Ongoing work must precede Publications');
+if (html.includes('>On-going<')) throw new Error('Outdated ongoing manuscript status remains');
+if (html.indexOf('id="submitted-title"') > html.indexOf('id="publications"')) throw new Error('Submitted work must precede Publications');
 for (const url of ['https://github.com/l3umblee/duet-sfda', 'https://github.com/capableofanything/SKETCH']) {
   if (!html.includes(url)) throw new Error(`Missing supplied code link: ${url}`);
 }

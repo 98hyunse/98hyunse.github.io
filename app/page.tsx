@@ -28,10 +28,10 @@ export default function Home() {
         <div className="identity"><div className="portrait-frame"><img src="/assets/hyunse-lee.png" width="1108" height="1419" alt="Hyunse Lee" fetchPriority="high" /></div><div><p className="eyebrow">AI RESEARCH · DONGGUK UNIVERSITY</p><h1 id="name">Hyunse Lee</h1><p className="role">AI Researcher &amp; M.S. Student</p><div className="profile-links"><a href="mailto:98hyunse@gmail.com">98hyunse@gmail.com</a><a href="https://github.com/98hyunse">GitHub <span aria-hidden="true">↗</span></a><a href="/assets/Hyunse-Lee-CV-KO.pdf" download>Download CV <span className="link-note">(Korean PDF)</span> <span aria-hidden="true">↓</span></a></div></div></div>
         <div className="bio"><p>I am an M.S. student interested in <strong>Vision–Language–Action (VLA), Embodied Agents, Vision–Language Models (VLMs), and Computer Vision.</strong></p><p>I aim to understand how technology works and turn that understanding into practical AI and robotics solutions. I am especially motivated by real-world problems. I want to work close to where technology is used and build tools that help people in their work and everyday lives.</p></div>
       </section>
-        <aside className="ongoing-work" aria-labelledby="ongoing-title">
-          <p className="eyebrow">On-going</p>
-          <h3 id="ongoing-title">Safer robot manipulation with VLA post-training</h3>
-          <p>Studying post-training methods that compare safe and unsafe actions to help robot arms avoid collisions in simulation.</p>
+        <aside className="submitted-work" aria-labelledby="submitted-title">
+          <p className="eyebrow">Submitted to ICRA 2027</p>
+          <h3 id="submitted-title">Collision-to-Preference: Post-Training Vision-Language-Action Policies for Collision Avoidance</h3>
+          <p>Developed a post-training framework that turns collision experience into preference supervision, helping robot arms avoid obstacles in simulation without deployment-time guidance.</p>
         </aside>
       <Section id="publications" number="01" title="Publications">
         <p className="legend">* Equal contribution (co-first authors) · † Corresponding author</p>
