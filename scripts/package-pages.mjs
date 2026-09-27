@@ -5,17 +5,17 @@ import { resolve } from 'node:path';
 const source = resolve('dist/client');
 const target = resolve('out');
 const html = readFileSync(resolve(source, 'index.html'), 'utf8');
-for (const expected of ['Hyunse Lee', 'SafeBranch', 'SeMoBridge', 'Under revision', 'Submitted to ICRA 2027', 'Collision-to-Preference', '4.13']) {
+for (const expected of ['Hyunse Lee', 'The Quiet Prompt', 'NeurIPS 2026 · Accepted', 'SafeBranch', 'Explainable Graph-Based Golf Swing Analysis', 'SeMoBridge', 'Under revision', 'Submitted to ICRA 2027', 'Collision-to-Preference', '4.13']) {
   if (!html.includes(expected)) throw new Error(`Missing expected content: ${expected}`);
 }
 if (html.includes('Your site is taking shape')) throw new Error('Starter content remains');
 if (html.includes('id="research"') || html.includes('class="research-list"')) throw new Error('Separate research list remains');
-if ((html.match(/class="paper-description"/g) || []).length !== 6) throw new Error('Each publication must have a research explanation');
+if ((html.match(/class="paper-description"/g) || []).length !== 8) throw new Error('Each publication must have a research explanation');
 if (!html.includes('/assets/hyunse-lee.png')) throw new Error('New portrait is missing');
 if (html.includes('paper-card')) throw new Error('Draft card design must not be deployed');
 if (!html.includes('href="mailto:98hyunse@gmail.com"')) throw new Error('Contact email is missing');
 const articles = [...html.matchAll(/<article>([\s\S]*?)<\/article>/g)];
-if (articles.length !== 6 || articles.some(([, article]) => article.indexOf('class="venue"') < 0 || article.indexOf('class="venue"') > article.indexOf('<h3>'))) {
+if (articles.length !== 8 || articles.some(([, article]) => article.indexOf('class="venue"') < 0 || article.indexOf('class="venue"') > article.indexOf('<h3>'))) {
   throw new Error('Publication venue and status must precede each title');
 }
 if ((html.match(/class="education-entry"><p class="date"/g) || []).length !== 3) throw new Error('Education dates must lead each entry');
