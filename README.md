@@ -19,7 +19,7 @@ The Collision-to-Preference manuscript is listed as submitted to ICRA 2027 on bo
 The Quiet Prompt is listed as accepted to NeurIPS 2026 based on the researcher's confirmation and the lab's public research record.
 An English translation is labeled when no official English paper title was verified.
 The ITC-CSCC award retains the conference year (2025) and award date (July 2026) as supplied.
-The Korean CV was refreshed on October 16, 2026 to match the English profile: eight publications with Korean research descriptions, a separate submitted-manuscript block, education, awards, and public contact links. It remains a two-page Korean PDF.
+The Korean CV was refreshed on October 16, 2026 to match the English profile: a structured overview, eight publications with Korean research descriptions in the `~함` style, a separate submitted-manuscript block, education, awards, and public contact links. The two-page PDF uses automatic pagination and keeps each paper together.
 
 Publication metadata references: [CoCoder publisher record](https://ksbe-jbe.org/_common/do.php?a=full&aidx=40740&b=12&bidx=3676), [EEG article](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12317768).
 
